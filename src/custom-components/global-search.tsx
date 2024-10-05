@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
@@ -8,6 +8,7 @@ import { Search } from "lucide-react"
 import { BackgroundGradient } from '@/components/ui/background-gradient'
 import Image from 'next/image'
 import getLogo from '@/utils/school-logo-mapping'
+import dynamic from 'next/dynamic'
 
 interface School {
   objectid: string,
@@ -101,6 +102,14 @@ const GlobalSearch: React.FC = () => {
     }
   }
 
+  const Map = useMemo(() => dynamic(
+    () => import('@/custom-components/leaflet-map'),
+    {
+        loading: () => <p>A map is loading</p>,
+        ssr: false
+    }
+), [])
+
   return (
     <div className="flex flex-col gap-4 w-full max-w-sm">
       <div className="flex gap-2">
@@ -129,7 +138,6 @@ const GlobalSearch: React.FC = () => {
             {data.results.map((school) => (
               <div key={school.objectid}>
               <BackgroundGradient className="rounded-[22px] max-w-sm p-4 sm:p-10 bg-white dark:bg-zinc-900">
-                {school.name.toUpperCase()}
                 <Image
                   src={getLogo(school.objectid) ?? 'https://via.placeholder.com/400'}
                   alt="jordans"
@@ -156,6 +164,7 @@ const GlobalSearch: React.FC = () => {
                     $100
                   </span> */}
                 </button>
+                <Map posix={[parseFloat(school.latitude), parseFloat(school.longitude)]} url={school.website} />
               </BackgroundGradient>
             </div>
               // <li key={school.objectid}>

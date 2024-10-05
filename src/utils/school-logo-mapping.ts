@@ -1,4 +1,4 @@
-export default function getLogo(objId: string): string {
+export default function getLogo(objId: string): string | null {
   const logoMap = {
     "322": '/logos/2000.png', //Abilene Christian
     "5566": '/logos/2005.png', //Air Force
@@ -358,5 +358,5 @@ export default function getLogo(objId: string): string {
     "662": '/logos/2754.png', //Youngstown State
   }
   // @ts-expect-error - this is a valid key
-  return logoMap[objId] || '';
+  return logoMap[objId] || null;
 }
