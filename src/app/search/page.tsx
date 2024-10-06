@@ -12,7 +12,7 @@ export default function Page() {
       <h1 className={cn("md:text-5xl text-xl pt-36 text-white relative z-20")}>
         Find your next school
       </h1>
-      <div className={cn("z-20 m-8")}>
+      <div className={cn("flex flex-row justify-center z-20 m-8 w-full")}>
         <GlobalSearch />
       </div>
     </div>

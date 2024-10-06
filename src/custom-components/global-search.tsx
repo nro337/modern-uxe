@@ -170,10 +170,10 @@ const GlobalSearch: React.FC = () => {
       {isError && <p>Error fetching results</p>}
       {data && (
         <div>
-          <h2>Search Results:</h2>
+          {data.total_count === 0 && <p>No results found</p>}
           <ul>
             {data.results.map((school) => (
-              <div key={school.objectid}>
+              <div key={school.objectid} className="my-4">
                 <BackgroundGradient className="rounded-[22px] max-w-sm p-4 sm:p-10 bg-white dark:bg-zinc-900">
                   <Image
                     src={
@@ -197,14 +197,19 @@ const GlobalSearch: React.FC = () => {
                       Pop:{" "}
                       {parseInt(school.population) < 0
                         ? "N/A"
-                        : school.population}
+                        : parseInt(school.population).toLocaleString()}
                     </span>
                     {/* <span className="bg-zinc-700 rounded-full text-[0.6rem] px-2 py-0 text-white">
                     $100
                   </span> */}
                   </button>
                   <button className="rounded-full pl-4 pr-4 py-1 text-white flex items-center space-x-1 bg-black mt-4 text-xs font-bold dark:bg-zinc-800">
-                    <span>{school.objectid}</span>
+                  <span>
+                      Enrolled:{" "}
+                      {parseInt(school.tot_enroll) < 0
+                        ? "N/A"
+                        : parseInt(school.tot_enroll).toLocaleString()}
+                    </span>
                     {/* <span className="bg-zinc-700 rounded-full text-[0.6rem] px-2 py-0 text-white">
                     $100
                   </span> */}

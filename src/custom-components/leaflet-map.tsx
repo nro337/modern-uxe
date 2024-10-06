@@ -1,11 +1,8 @@
 'use client'
 // Help: https://andresprieto-25116.medium.com/how-to-use-react-leaflet-in-nextjs-with-typescript-surviving-it-21a3379d4d18
-import { cn } from "@/lib/utils";
-import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
+import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import '../custom-components/leaflet-map.css'
-import markerIconPng from "leaflet/dist/images/marker-icon.png";
-import markerShadowPng from "leaflet/dist/images/marker-shadow.png";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
 import "leaflet-defaulticon-compatibility";
 import { LatLngExpression, LatLngTuple } from "leaflet";
@@ -26,8 +23,8 @@ const LeafletMap = (Map: MapProps) => {
     <MapContainer
       center={posix}
       zoom={zoom}
-      scrollWheelZoom={false}
-      style={{ height: 250, width: 300 }}
+      scrollWheelZoom={true}
+      style={{ height: 250, width: 300, marginTop: 16 }}
       
     >
       <TileLayer
