@@ -8,6 +8,7 @@ import { Search } from "lucide-react"
 import { BackgroundGradient } from '@/components/ui/background-gradient'
 import Image from 'next/image'
 import getLogo from '@/utils/school-logo-mapping'
+import { BlinkBlur } from "react-loading-indicators"
 import dynamic from 'next/dynamic'
 
 interface School {
@@ -105,7 +106,7 @@ const GlobalSearch: React.FC = () => {
   const Map = useMemo(() => dynamic(
     () => import('@/custom-components/leaflet-map'),
     {
-        loading: () => <p>A map is loading</p>,
+        loading: () => <BlinkBlur color="#6789BF" size="medium" text="" textColor="" />,
         ssr: false
     }
 ), [])
@@ -129,7 +130,7 @@ const GlobalSearch: React.FC = () => {
           <Search className="mr-2 h-4 w-4" /> Search
         </Button>
       </div>
-      {isLoading && <p>Loading...</p>}
+      {isLoading && <BlinkBlur color="#6789BF" size="medium" text="" textColor="" />}
       {isError && <p>Error fetching results</p>}
       {data && (
         <div>
